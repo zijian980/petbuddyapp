@@ -23,7 +23,7 @@ const CreateProfile = () => {
       <Text style={styles.subtitle}>What are you signing up to be?</Text>
 
       <TouchableOpacity style={styles.button} 
-      onPress={() => router.push('/(auth)/caretakerProfile')}>
+      onPress={() => router.push('/(auth)/caretakerProfileNew')}>
         <Text style={styles.buttonText}>Caretaker</Text>
       </TouchableOpacity>
       
