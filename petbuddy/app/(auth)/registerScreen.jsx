@@ -135,7 +135,7 @@ const Register = () => {
               <Text style={styles.modalTitle}>Terms and Conditions</Text>
               <Text style={styles.modalText}>
                 {/* Insert your actual terms and conditions here */}
-                By using PetBuddy, you agree that the the team of developers will not be liable for any damages or privacy issue that may arise from the usage of this app.
+                By using PetBuddy, you agree that our team of developers will not be liable for any damages or privacy issue that may arise from the usage of this app.
               </Text>
             </ScrollView>
             <Button title="Close" onPress={() => setIsModalVisible(false)} />
