@@ -1,59 +1,8 @@
-// app/addPetProfile.js
-/*import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, StatusBar } from 'react-native';
-import { Link, router } from 'expo-router';
-
-const AddPetProfile = () => {
-  const [petName, setPetName] = useState('');
-  const [species, setSpecies] = useState('');
-  const [breed, setBreed] = useState('');
-  const [age, setAge] = useState('');
-  const [health, setHealth] = useState('');
-  const [preferences, setPreferences] = useState('');
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Create Profile</Text>
-      <Text style={styles.subtitle}>Pet 1</Text>
-
-      <TouchableOpacity>
-        <Text style={styles.linkText}>Add profile picture</Text>
-      </TouchableOpacity>
-
-      <TextInput style={styles.input} placeholder="Pet's name" value={petName} onChangeText={setPetName} />
-      <TextInput style={styles.input} placeholder="Species" value={species} onChangeText={setSpecies} />
-      <TextInput style={styles.input} placeholder="Breed" value={breed} onChangeText={setBreed} />
-      <TextInput style={styles.input} placeholder="Age" value={age} onChangeText={setAge} />
-      <TextInput style={styles.input} placeholder="Health Conditions" value={health} onChangeText={setHealth} />
-      <TextInput style={styles.input} placeholder="Preferences" value={preferences} onChangeText={setPreferences} />
-
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Save</Text>
-      </TouchableOpacity>
-      <StatusBar style='dark'/>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, justifyContent: 'center' },
-  title: { fontSize: 28, fontWeight: 'bold', color: 'orange', textAlign: 'center' },
-  subtitle: { fontSize: 20, marginVertical: 20 },
-  linkText: { color: 'blue', textAlign: 'center', marginBottom: 10 },
-  input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 8, padding: 10, marginVertical: 10 },
-  button: { backgroundColor: 'orange', padding: 15, borderRadius: 10, alignItems: 'center', marginVertical: 20 },
-  buttonText: { color: 'white', fontSize: 16 }
-});
-
-export default AddPetProfile; */
-
-// app/addpetprofile.js
 import React, { useState, useEffect } from 'react';
-import { View, Text,image, TextInput, TouchableOpacity, StyleSheet, StatusBar, KeyboardAvoidingView, Platform, ScrollView, Image, Alert } from 'react-native';
-import { Link } from 'expo-router';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, StatusBar, KeyboardAvoidingView, Platform, ScrollView, Alert, Pressable } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
-const AddPetProfile = () => {
+const AddPetProfileTest = () => {
   const [formData, setFormData] = useState({
     petName: '',
     species: '',
@@ -64,20 +13,21 @@ const AddPetProfile = () => {
   });
 
   const [image, setImage] = useState(null); // State to store the selected image
-  const [isFormValid, setIsFormValid] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false); // State to track form validity
 
+  // Handle form input changes
   const handleInputChange = (key, value) => {
     setFormData({ ...formData, [key]: value });
   };
 
+  // Check if all required fields are filled
   useEffect(() => {
     const requiredFieldsFilled =
-      (formData.petName !== '') && 
-      (formData.species !== '') && 
-      (formData.breed !== '') && 
-      (formData.age !== '') && 
-      (formData.healthConditions !== '')
-      
+      formData.petName !== '' &&
+      formData.species !== '' &&
+      formData.breed !== '' &&
+      formData.age !== '';
+
     setIsFormValid(requiredFieldsFilled);
   }, [formData]);
 
@@ -94,48 +44,58 @@ const AddPetProfile = () => {
 
   // Function to open image picker
   const pickImage = async () => {
-    
-    let result = await ImagePicker.launchImageLibraryAsync({
+    // Request permission to access media
+    /*const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (permissionResult.granted === false) {
+      Alert.alert("Permission Required", "Permission to access the camera roll is required!");
+      return;
+    }
+
+    // Open image picker
+    const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [1, 1],
       quality: 1,
     });
 
-    console.log(result);
-
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
-    }
-  }
+      setImage(result.uri);
+    }*/
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+  
+      console.log(result);
+  
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+      }
+  };
 
   return (
     <View style={styles.container}>
-      <KeyboardAvoidingView 
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={10} // Adjust this offset as needed
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={10} // Adjust this offset as needed
       >
         <ScrollView showsVerticalScrollIndicator={false}>
-
           {/* Status Bar */}
           <StatusBar barStyle="dark-content" />
 
-          {/* App name and greeting */}
-          <View style={styles.headerContainer}>
-            <Text style={styles.appName}>PetBuddy</Text>
-            <Text style={styles.greeting}>Hi, John!</Text>
-          </View>
-
-          {/* Title and pet image */}
+          {/* Title */}
           <Text style={styles.title}>Create Profile</Text>
-          <Text style={styles.subtitle}>Pet</Text>
 
-         {/* Signup Link */}
-         <View style={styles.imageUploadContainer}>
+          {/* Image Upload */}
+          <View style={styles.imageUploadContainer}>
             {image ? (
               <Image source={{ uri: image }} style={styles.petImage} />
             ) : (
-              <Image source={require('../../assets/images/brownpuppy.png')} style={styles.petImage} />
+              <Image source={require('../../assets/images/whitepuppy.png')} style={styles.petImage} />
             )}
             <TouchableOpacity onPress={pickImage}>
               <Text style={styles.addPhotoText}>Add profile picture</Text>
@@ -160,7 +120,7 @@ const AddPetProfile = () => {
               <Text style={styles.label}>Species*</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Dog, cat, etc."
+                placeholder="Dog, Cat, etc."
                 value={formData.species}
                 onChangeText={(text) => handleInputChange('species', text)}
               />
@@ -188,9 +148,9 @@ const AddPetProfile = () => {
               />
             </View>
 
-            {/* Health Conditions */}
+            {/* Health Conditions (Optional) */}
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Health Conditions*</Text>
+              <Text style={styles.label}>Health Conditions (optional)</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Healthy, breathing difficulty, etc."
@@ -199,12 +159,12 @@ const AddPetProfile = () => {
               />
             </View>
 
-            {/* Preferences */}
+            {/* Preferences (Optional) */}
             <View style={styles.formGroup}>
-              <Text style={styles.label}>Preferences</Text>
+              <Text style={styles.label}>Preferences (optional)</Text>
               <TextInput
                 style={styles.input}
-                placeholder="If any"
+                placeholder="If any."
                 value={formData.preferences}
                 onChangeText={(text) => handleInputChange('preferences', text)}
               />
@@ -212,7 +172,11 @@ const AddPetProfile = () => {
           </View>
 
           {/* Save Button */}
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <TouchableOpacity
+            style={[styles.button, !isFormValid && styles.buttonDisabled]} // Disable button if form is invalid
+            onPress={handleSubmit}
+            disabled={!isFormValid} // Disable interaction if form is invalid
+          >
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>
         </ScrollView>
@@ -227,34 +191,12 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: 'white',
   },
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: 25,
-  },
-  appName: {
-    fontSize: 20,
-    fontFamily: 'Jua-Regular',
-    color: '#FFA154',
-  },
-  greeting: {
-    fontSize: 16,
-    fontFamily: 'Poppins-Bold',
-    color: '#FFA154',
-  },
   title: {
     fontSize: 32,
     fontFamily: 'Jua-Regular',
     color: 'black',
     textAlign: 'center',
     marginVertical: 10,
-  },
-  subtitle: {
-    fontSize: 24,
-    fontFamily: 'Jua-Regular',
-    color: '#FFA154',
-    textAlign: 'center',
   },
   imageUploadContainer: {
     alignItems: 'center',
@@ -266,49 +208,44 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 1,
     borderColor: '#ffa154',
-    marginTop: 10,
   },
   addPhotoText: {
-    color: 'blue',
+    color: '#007BFF',
     marginTop: 10,
-    textDecorationLine: 'underline',
-    fontFamily: 'Poppins-Regular',
+    fontSize: 16,
+    fontFamily: 'Poppins-Bold',
   },
   form: {
-    marginVertical: 10,
+    marginVertical: 20,
   },
   formGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
     marginBottom: 15,
   },
   label: {
     fontSize: 16,
-    width: 140, // Increased to accommodate longer labels
     fontWeight: 'bold',
   },
   input: {
-    flex: 1,
     borderWidth: 1,
     borderRadius: 6,
-    borderStyle: "solid",
-    borderColor: "#ffa154",
+    borderStyle: 'solid',
+    borderColor: '#ffa154',
     padding: 10,
   },
   button: {
-    backgroundColor: 'orange',
+    backgroundColor: '#ffa154',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
-    marginTop: 10,
-    marginHorizontal: 90,
-  
   },
   buttonText: {
     color: 'white',
     fontSize: 16,
     fontFamily: 'Jua-Regular',
   },
+  buttonDisabled: {
+    backgroundColor: '#ccc', // Change button color when disabled
+  },
 });
 
-export default AddPetProfile;
+export default AddPetProfileTest;

@@ -1,118 +1,4 @@
 // app/register.js
-/*import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar } from 'react-native';
-import { Link, router } from 'expo-router';
-
-const RegisterScreen = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [agreePolicy, setAgreePolicy] = useState(false);
-
-  return (
-    <View style={styles.container}>
-      {/* Title *///}
-     /* <Text style={styles.title}>PetBuddy</Text>
-      <Text style={styles.subtitle}>Registration</Text>
-
-      {/* Username Input *///}
-     /* <TextInput
-        style={styles.input}
-        placeholder="Username*"
-        value={username}
-        onChangeText={setUsername}
-      />
-
-      {/* Email Input *///}
-     /* <TextInput
-        style={styles.input}
-        placeholder="Email*"
-        value={email}
-        onChangeText={setEmail}
-      />
-
-      {/* Password Input *///}
-     /* <TextInput
-        style={styles.input}
-        placeholder="Password*"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-
-      {/* Confirm Password Input *///}
-      /*<TextInput
-        style={styles.input}
-        placeholder="Confirm your password*"
-        value={confirmPassword}
-        onChangeText={setConfirmPassword}
-        secureTextEntry
-      />
-
-      {/* Register Button *///}
-     /* <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity>
-
-      {/* Login link *///}
-    /*  <View style={styles.loginTextContainer}>
-        <Text>Already have an account? </Text>
-        <Link href="/loginScreen" style={styles.loginText}>Login</Link>
-      </View>
-      <StatusBar style='dark'/>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: 'orange',
-    textAlign: 'center',
-  },
-  subtitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    marginVertical: 20,
-    textAlign: 'center',
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 10,
-    marginVertical: 10,
-  },
-  button: {
-    backgroundColor: 'orange',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginVertical: 20,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-  },
-  loginTextContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  loginText: {
-    color: 'blue',
-  },
-});
-
-export default RegisterScreen;*/
-
-// app/register.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar, KeyboardAvoidingView, Platform, ScrollView, Modal, Button } from 'react-native';
 import { Link, router } from 'expo-router';
@@ -249,7 +135,7 @@ const Register = () => {
               <Text style={styles.modalTitle}>Terms and Conditions</Text>
               <Text style={styles.modalText}>
                 {/* Insert your actual terms and conditions here */}
-                By using PetBuddy, you agree that the developer will not be liable for any damages or any privacy issue that may arise from the usage of this app.
+                By using PetBuddy, you agree that the the team of developers will not be liable for any damages or privacy issue that may arise from the usage of this app.
               </Text>
             </ScrollView>
             <Button title="Close" onPress={() => setIsModalVisible(false)} />

@@ -1,52 +1,3 @@
-// app/addPetProfile.js
-/*import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, StatusBar } from 'react-native';
-import { Link, router } from 'expo-router';
-
-const AddPetProfile = () => {
-  const [petName, setPetName] = useState('');
-  const [species, setSpecies] = useState('');
-  const [breed, setBreed] = useState('');
-  const [age, setAge] = useState('');
-  const [health, setHealth] = useState('');
-  const [preferences, setPreferences] = useState('');
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Create Profile</Text>
-      <Text style={styles.subtitle}>Pet 1</Text>
-
-      <TouchableOpacity>
-        <Text style={styles.linkText}>Add profile picture</Text>
-      </TouchableOpacity>
-
-      <TextInput style={styles.input} placeholder="Pet's name" value={petName} onChangeText={setPetName} />
-      <TextInput style={styles.input} placeholder="Species" value={species} onChangeText={setSpecies} />
-      <TextInput style={styles.input} placeholder="Breed" value={breed} onChangeText={setBreed} />
-      <TextInput style={styles.input} placeholder="Age" value={age} onChangeText={setAge} />
-      <TextInput style={styles.input} placeholder="Health Conditions" value={health} onChangeText={setHealth} />
-      <TextInput style={styles.input} placeholder="Preferences" value={preferences} onChangeText={setPreferences} />
-
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Save</Text>
-      </TouchableOpacity>
-      <StatusBar style='dark'/>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: { flex: 1, padding: 20, justifyContent: 'center' },
-  title: { fontSize: 28, fontWeight: 'bold', color: 'orange', textAlign: 'center' },
-  subtitle: { fontSize: 20, marginVertical: 20 },
-  linkText: { color: 'blue', textAlign: 'center', marginBottom: 10 },
-  input: { borderWidth: 1, borderColor: '#ccc', borderRadius: 8, padding: 10, marginVertical: 10 },
-  button: { backgroundColor: 'orange', padding: 15, borderRadius: 10, alignItems: 'center', marginVertical: 20 },
-  buttonText: { color: 'white', fontSize: 16 }
-});
-
-export default AddPetProfile; */
-
 // app/addpetprofile.js
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar, KeyboardAvoidingView, Platform, ScrollView, Image, Alert } from 'react-native';
@@ -61,6 +12,7 @@ const AddServiceProfile = () => {
     location: '',
   });
 
+  const [image, setImage] = useState(null); // State to store the selected image
   const [isFormValid, setIsFormValid] = useState(false);
 
   const handleInputChange = (key, value) => {
@@ -82,11 +34,27 @@ const AddServiceProfile = () => {
     if (isFormValid) {
       // Perform form submission logic here
       console.log(formData);
-      Alert.alert("Success", "Pet profile saved successfully!");
+      Alert.alert("Success", "Services saved successfully!");
     } else {
       Alert.alert("Error", "Please fill out all required fields.");
     }
   };
+
+  const pickImage = async () => {
+    
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -108,11 +76,17 @@ const AddServiceProfile = () => {
           {/* Title and pet image */}
           <Text style={styles.title}>Create a Service</Text>
           <Text style={styles.subtitle}>Services</Text>
-          <Image source={require('../../assets/images/brownpuppy.png')}style={styles.image} />
          {/* Signup Link */}
-          <Text style={styles.addServicePicture}>
-            <Link href="/dummyScreen" style={styles.addServicePictureLink}>Add service picture</Link> {/*to add to database*/}
-          </Text>
+          <View style={styles.imageUploadContainer}>
+            {image ? (
+              <Image source={{ uri: image }} style={styles.image} />
+            ) : (
+              <Image source={require('../../assets/images/doggrooming.png')} style={styles.image} />
+            )}
+            <TouchableOpacity onPress={pickImage}>
+              <Text style={styles.addServicePictureLink}>Add service picture</Text>
+            </TouchableOpacity>
+          </View>
 
           {/* Form fields */}
           <View style={styles.form}>
@@ -207,19 +181,23 @@ const styles = StyleSheet.create({
     color: '#FFA154',
     textAlign: 'center',
   },
-  image: {  
-    marginVertical: 10,
-    alignSelf: 'center'
-  },
-  addServicePicture: {
-    textAlign: 'center',
-    fontSize: 16,
-    fontFamily: 'Poppins-Regular',
+  image: {
+    width: 300,
+    height: 150,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#ffa154',
+    marginTop: 10,
   },
   addServicePictureLink: {
     color: 'blue',
     textDecorationLine: 'underline',
     fontFamily: 'Poppins-Regular',
+    marginTop: 20
+  },
+  imageUploadContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
   },
   form: {
     marginVertical: 20,

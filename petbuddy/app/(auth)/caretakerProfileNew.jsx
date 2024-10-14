@@ -84,7 +84,7 @@ const OwnerProfile = () => {
 
         {/* Location */}
         <View style={styles.formGroup}>
-          <Text style={styles.label}>Location</Text>
+          <Text style={styles.label}>Work Experience*</Text>
           <TextInput
             style={styles.input}
             placeholder="6 months, 1 year, etc."
