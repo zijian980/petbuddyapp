@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image, StatusBar, Alert } from 'react-native';
 import { Link, router } from 'expo-router';
 
-const OwnerProfile = () => {
+const caretakerProfileNew = () => {
   const [formData, setFormData] = useState({
     name: '',
     dob: '',
@@ -223,5 +223,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OwnerProfile;
+export default caretakerProfileNew;
 
