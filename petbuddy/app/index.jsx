@@ -1,11 +1,22 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity, StatusBar, SafeAreaView } from "react-native";
 import { Redirect, Link, router } from 'expo-router';
 import { useFonts } from "expo-font";
+import { Video, ResizeMode } from 'expo-av'
+import * as React from "react";
 
 const WelcomeScreen = () => {
+  const video = React.useRef(null);
   return (
     <SafeAreaView style={styles.container}>
-
+      <Video
+        ref={video}
+        style={styles.video}
+        source={require('./../assets/images/dogrunwithowner.mp4')}
+        resizeMode={ResizeMode.COVER}
+        shouldPlay
+        isLooping
+      />
+      <SafeAreaView style={styles.overlay}>
       {/* Status Bar */}
       <StatusBar barStyle="dark-content" />
 
@@ -31,6 +42,7 @@ const WelcomeScreen = () => {
       >
         <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>
+      </SafeAreaView>
     </SafeAreaView>
   );
 };
@@ -42,8 +54,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
   },
+  video: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
   pretitle: {
-    color: 'black',
+    color: 'white',
     fontSize: 32,
     fontFamily: 'Jua-Regular',
     fontWeight: '400',
@@ -60,7 +81,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   description: {
-    color: 'black',
+    color: 'white',
     fontSize: 12,
     fontFamily: 'Poppins-Regular',
     fontWeight: '400',
