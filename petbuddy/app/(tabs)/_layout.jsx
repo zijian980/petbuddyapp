@@ -33,7 +33,7 @@ const TabLayout = () => {
      <View style={styles.headerContainer}>
             <Text style={styles.appName}>PetBuddy</Text>
             <Text style={styles.greeting}>Hi, John!</Text>
-          </View>
+      </View>
       <Tabs
         screenOptions={{
           headerShown: false,
@@ -199,7 +199,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 25,
+    marginTop: 30,
+    marginHorizontal: 18,
   },
   appName: {
     fontSize: 20,
