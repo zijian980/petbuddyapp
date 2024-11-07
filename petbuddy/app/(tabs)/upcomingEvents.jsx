@@ -70,13 +70,13 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'left',
     marginBottom: 16,
   },
   backLink: {
     color: '#FF8C00',
     fontSize: 30,
-    marginRight: 16,
+    marginBottom: 16,
   },
   title: {
     fontSize: 24,

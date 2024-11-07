@@ -84,11 +84,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
+    marginRight: 16,
   },
   backLink: {
     color: '#FF8C00',
-    fontSize: 24,
-    marginRight: 16,
+    fontSize: 40,
+    //marginRight: 6,
+    marginBottom: 16,
   },
   title: {
     fontSize: 24,

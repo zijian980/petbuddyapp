@@ -10,11 +10,12 @@ const editprofile = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Edit Profile</Text>
-
-      <TouchableOpacity onPress={() => navigation.navigate('profilePetOwner')}>
-        <Text style={styles.link}>←</Text>
-      </TouchableOpacity>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate('profilePetOwner')}>
+          <Text style={styles.link}>←</Text>
+        </TouchableOpacity>
+        <Text style={styles.title}>Edit Profile</Text>
+      </View>
 
       <View style={styles.imageContainer}>
         <Image
@@ -79,14 +80,22 @@ const styles = StyleSheet.create({
   container: {
     padding: 24,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    //marginBottom: 10,
+    marginRight: 30,
+  },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 32,
+    //marginBottom: 32,
   },
   link: {
     color: '#FFA500',
-    fontSize: 24,
+    fontSize: 40,
+    marginBottom: 15,
   },
   imageContainer: {
     alignItems: 'center',

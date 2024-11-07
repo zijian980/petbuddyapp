@@ -34,10 +34,12 @@ const viewEvents = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
       <TouchableOpacity onPress={() => navigation.navigate('homepage')}>
         <Text style={styles.backLink}>←</Text>
       </TouchableOpacity>
       <Text style={styles.title}>View Events</Text>
+      </View>
       <View style={styles.eventsContainer}>
         {events.map(event => (
           <View key={event.id} style={styles.eventCard}>
@@ -59,17 +61,23 @@ const styles = StyleSheet.create({
   container: {
     padding: 16,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'left',
+    marginBottom: 16,
+  },
   backLink: {
     color: '#FF8C00',
     fontSize: 40,
     marginBottom: 16,
-    marginLeft: 16,
+    //marginLeft: 16,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 24,
+    //marginBottom: 24,
   },
   eventsContainer: {
     spaceBetween: 8,

@@ -85,9 +85,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   backButton: {
-    fontSize: 24,
+    fontSize: 40,
     color: '#FF8C00', // Orange color
-    marginRight: 16,
+    marginBottom: 16,
   },
   title: {
     fontSize: 24,
