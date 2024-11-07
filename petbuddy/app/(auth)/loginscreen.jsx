@@ -148,7 +148,7 @@ const Login = () => {
       {/* Login Button 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>*/}
       <TouchableOpacity style={styles.button} 
-      onPress={() => router.push('/(auth)/dummyScreen')}>
+      onPress={() => router.push('/homepage')}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
