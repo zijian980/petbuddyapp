@@ -20,7 +20,7 @@ const Register = () => {
     termsAccepted &&
     password === confirmPassword;
     
-  const handleRegister = () => {
+  [/*const handleRegister = () => {
     // Handle registration logic
     console.log('Register with:', username, email, password, confirmPassword);
 
@@ -30,7 +30,42 @@ const Register = () => {
     }
     alert('Registration successful!');
     router.push('../(auth)/createProfile');
-  };
+  };*/]
+
+  const handleRegister = async () => {
+    if (!isFormValid) {
+      alert('Please fill all fields, ensure passwords match, and accept the terms and conditions.');
+      return;
+    }
+  
+    const registrationData = {
+      username: username,
+      email: email,
+      password: password, // password will be hashed on the backend
+    };
+    try {
+      const response = await fetch('http://127.0.0.1:8000/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(registrationData),
+      });
+  
+      if (response.ok) {
+        alert('Registration successful!');
+        router.push('../(auth)/createProfile');
+      } else {
+        const errorData = await response.json();
+        alert(`Registration failed: ${errorData.detail}`);
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      alert('An error occurred. Please try again.');
+    }
+  }
+    
+
 
   return (
     <View style={styles.container}>
